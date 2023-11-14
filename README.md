@@ -1,3 +1,8 @@
+использовал vite-template-redux
+в него включён притиер, который я недолюбливаю, но не стал тратить время на выпиливание. это же всего лишь неоплачиваемое тестовое задание. все вопросы по форматированию к притиеру
+
+
+
 # vite-template-redux
 
 Uses [Vite](https://vitejs.dev/), [Vitest](https://vitest.dev/), and [React Testing Library](https://github.com/testing-library/react-testing-library) to create a modern [React](https://react.dev/) app compatible with [Create React App](https://create-react-app.dev/)

@@ -17,6 +17,12 @@ export enum OnlineStatus {
   ONLINE = 2,
 }
 
+export enum ProfSpeciality {
+  CONSULTANT = 1,
+  SEXOLOGIST = 2,
+  COACH = 3,
+}
+
 export type Specialist = {
   userId: SpecialistId
   name: string
