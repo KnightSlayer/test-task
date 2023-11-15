@@ -5,6 +5,8 @@ import { fetchAllSubjectsThunk } from "../../domain/subject/subjectSlice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { SpecialistsFilter } from "../../domain/specialist/specialistApi";
 import {loadFirstPageThunk, loadMoreThunk, selectSearchSpecialistPageState} from "./searchSpecialistPageSlice";
+import {Button} from "../../common/components/Button";
+import {SpecialistsList} from "../../domain/specialist/components/SpecialistsList";
 
 export const SearchSpecialistPagePath = "/"
 
@@ -22,7 +24,10 @@ export const SearchSpecialistPage = () => {
     dispatch(loadMoreThunk(lastSubmittedFilterRef.current!))
   }, [])
 
-  const isLoading = useAppSelector((state) => selectSearchSpecialistPageState(state).status === 'loading')
+  const { status, totalCount, specialistIds } = useAppSelector(selectSearchSpecialistPageState)
+  const isLoading = status === 'loading'
+  const hasMore = totalCount !== null && totalCount > specialistIds.length
+  const isEmptySearch = totalCount === 0
 
   return (
     <Preloader loaders={loaders}>
@@ -31,6 +36,15 @@ export const SearchSpecialistPage = () => {
           onSubmit={onSubmit}
           disableSubmit={isLoading}
         />
+
+        <SpecialistsList specialistIds={specialistIds} />
+
+        { isLoading && <div> TODO: Skeleton </div>}
+        { hasMore && (
+          <Button onClick={loadMore}>
+            Показать еще
+          </Button>
+        )}
       </div>
     </Preloader>
   )

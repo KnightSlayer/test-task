@@ -1,24 +1,13 @@
-на момент написания этого у меня локально стояла нода версии v14.21.3
-на актуальных версиях тоже должно собираться. но если что откатитесь (например так https://www.npmjs.com/package/n)
+# Для проверяющих
 
-использовал vite-template-redux
-в него включён притиер, который я недолюбливаю, но не стал тратить время на выпиливание. это же всего лишь неоплачиваемое тестовое задание. все вопросы по форматированию к притиеру
+На момент написания этого у меня локально стояла нода версии v14.21.3.
+На актуальных версиях тоже должно собираться. но если что откатитесь (например так https://www.npmjs.com/package/n)
 
+Использовал vite-template-redux. В него включён притиер, который меня начал раздражать и я его выключил посредине работы.
+От этого форматирование в коде получилось разношёрстным. Прошу не обращать на это внимание.
+Вообще я недолюбливаю и в своих проектах подробно настраиваю еслинт и включаю автофикс 
 
-# vite-template-redux
-
-Uses [Vite](https://vitejs.dev/), [Vitest](https://vitest.dev/), and [React Testing Library](https://github.com/testing-library/react-testing-library) to create a modern [React](https://react.dev/) app compatible with [Create React App](https://create-react-app.dev/)
-
-```sh
-npx degit reduxjs/redux-templates/packages/vite-template-redux my-app
-```
-
-## Goals
-
-- Easy migration from Create React App or Vite
-- As beginner friendly as Create React App
-- Optimized performance compared to Create React App
-- Customizable without ejecting
+дорабатывать решение можно ещё долго. для более приоритетных вещей оставил несколько TODO в коде
 
 ## Scripts
 
@@ -26,9 +15,3 @@ npx degit reduxjs/redux-templates/packages/vite-template-redux my-app
 - `build` - build for production
 - `preview` - locally preview production build
 - `test` - launch test runner
-
-## Inspiration
-
-- [Create React App](https://github.com/facebook/create-react-app/tree/main/packages/cra-template)
-- [Vite](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react)
-- [Vitest](https://github.com/vitest-dev/vitest/tree/main/examples/react-testing-lib)
