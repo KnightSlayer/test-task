@@ -1,12 +1,13 @@
+import { memo } from "react";
 import { SpecialistId } from "../Specialist";
-import {useAppSelector} from "../../../store/hooks";
-import {selectSpecialistById} from "../specialistSlice";
+import { useAppSelector } from "../../../store/hooks";
+import { selectSpecialistById } from "../specialistSlice";
 
 type SpecialistCardProps = {
   specialistId: SpecialistId
 }
 
-export const SpecialistCard = ({ specialistId }: SpecialistCardProps) => {
+export const SpecialistCard = memo(({ specialistId }: SpecialistCardProps) => {
   const specialist = useAppSelector((state) => selectSpecialistById(state, { specialistId }))
 
   if (!specialist) {
@@ -18,4 +19,4 @@ export const SpecialistCard = ({ specialistId }: SpecialistCardProps) => {
       { specialist.name }
     </div>
   )
-}
+})
