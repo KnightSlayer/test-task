@@ -25,6 +25,7 @@ export const SpecialistFilterForm = memo((props: SpecialistFilterFormProps) => {
   const navigate = useNavigate();
   const queryFilters = qs.parse(window.location.search.slice(1)) as unknown as SpecialistsFilter // TODO: type guard
 
+  // TODO: вынести subjectOptions в пропсы. а то из-за useAppSelector компонент ререндарится лишние разы
   const subjects = useAppSelector(selectSubjects)
   const subjectOptions = useMemo(() => Object.values(subjects).map(subject => ({
     value: subject.id,
