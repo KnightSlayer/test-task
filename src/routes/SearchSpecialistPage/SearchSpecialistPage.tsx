@@ -7,6 +7,7 @@ import { SpecialistsFilter } from "../../domain/specialist/specialistApi";
 import { loadFirstPageThunk, loadMoreThunk, selectSearchSpecialistPageState } from "./searchSpecialistPageSlice";
 import { Button } from "../../common/components/Button";
 import { SpecialistsList } from "../../domain/specialist/components/SpecialistsList";
+import { EmptySearchBanner } from "./EmptySearchBanner";
 
 export const SearchSpecialistPagePath = "/"
 
@@ -36,6 +37,8 @@ export const SearchSpecialistPage = () => {
           onSubmit={onSubmit}
           disableSubmit={isLoading}
         />
+
+        { isEmptySearch && <EmptySearchBanner />}
 
         <SpecialistsList specialistIds={specialistIds} />
 
