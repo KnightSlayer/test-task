@@ -18,6 +18,7 @@ import { SpecialistsFilter } from "../specialistApi"
 
 type SpecialistFilterFormProps = {
   onSubmit: (filterData: Omit<SpecialistsFilter, 'limit' | 'offset'>) => void
+  disableSubmit: boolean
 }
 
 export const SpecialistFilterForm = memo((props: SpecialistFilterFormProps) => {
@@ -158,7 +159,7 @@ export const SpecialistFilterForm = memo((props: SpecialistFilterFormProps) => {
         />
       </label>
 
-      <Button>
+      <Button disabled={props.disableSubmit}>
         Показать анкеты
       </Button>
     </form>

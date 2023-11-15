@@ -2,9 +2,9 @@ import { useCallback, useMemo, useRef } from "react"
 import { SpecialistFilterForm } from "../../domain/specialist/SpecialistFilterForm/SpecialistFilterForm"
 import { Preloader } from "../../common/components/Preloader"
 import { fetchAllSubjectsThunk } from "../../domain/subject/subjectSlice";
-import { useAppDispatch } from "../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { SpecialistsFilter } from "../../domain/specialist/specialistApi";
-import { loadFirstPageThunk, loadMoreThunk } from "./searchSpecialistPageSlice";
+import {loadFirstPageThunk, loadMoreThunk, selectSearchSpecialistPageState} from "./searchSpecialistPageSlice";
 
 export const SearchSpecialistPagePath = "/"
 
@@ -22,11 +22,15 @@ export const SearchSpecialistPage = () => {
     dispatch(loadMoreThunk(lastSubmittedFilterRef.current!))
   }, [])
 
+  const isLoading = useAppSelector((state) => selectSearchSpecialistPageState(state).status === 'loading')
 
   return (
     <Preloader loaders={loaders}>
       <div>
-        <SpecialistFilterForm onSubmit={onSubmit} />
+        <SpecialistFilterForm
+          onSubmit={onSubmit}
+          disableSubmit={isLoading}
+        />
       </div>
     </Preloader>
   )
