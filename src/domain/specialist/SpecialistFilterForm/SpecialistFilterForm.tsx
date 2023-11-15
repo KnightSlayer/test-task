@@ -56,6 +56,7 @@ export const SpecialistFilterForm = memo((props: SpecialistFilterFormProps) => {
   }, [])
 
   const onSubmit = (data: SpecialistFilterFormData) => {
+    // TODO: не сабмитить, если фильтр не поменялся
     const filterData = formDataToFilterData(data)
     navigate(
       {search: qs.stringify(filterData)},
