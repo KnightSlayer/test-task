@@ -1,19 +1,38 @@
-import { memo, useEffect, useState } from "react"
+import { memo, useEffect, useMemo } from "react"
 import { Controller, useForm } from "react-hook-form"
-import { SpecialistFilterFormData, formDataToFilterData, SEX_OPTIONS, AGE_OPTIONS } from "./SpecialistFilterFormService"
-import { Select } from "../../../common/components/Select";
+import { useNavigate } from "react-router-dom"
+import qs from 'qs'
+import {
+  SpecialistFilterFormData,
+  formDataToFilterData,
+  filterDataToFormData,
+  SEX_OPTIONS,
+  AGE_OPTIONS,
+  PROF_SPECIALITY_OPTIONS, RATING_OPTIONS
+} from "./SpecialistFilterFormService"
+import { Select } from "../../../common/components/Select"
+import { useAppSelector } from "../../../store/hooks"
+import { selectSubjects } from "../../subject/subjectSlice"
+import { Button } from "../../../common/components/Button"
+import { FetchSpecialistsFilter } from "../specialistApi"
 
-export const SpecialistFilterForm = memo(() => {
+type SpecialistFilterFormProps = {
+  onSubmit: (filterData: Omit<FetchSpecialistsFilter, 'limit' | 'offset'>) => void
+}
+
+export const SpecialistFilterForm = memo((props: SpecialistFilterFormProps) => {
+  const navigate = useNavigate();
+  const queryFilters = qs.parse(window.location.search.slice(1)) as unknown as FetchSpecialistsFilter // TODO: type guard
+
+  const subjects = useAppSelector(selectSubjects)
+  const subjectOptions = useMemo(() => Object.values(subjects).map(subject => ({
+    value: subject.id,
+    label: subject.name,
+  })), [subjects])
+
   const { control, handleSubmit, watch, getValues, setValue } = useForm<SpecialistFilterFormData>({
-    // defaultValues: { firstName: op.at(1) },
+    defaultValues: filterDataToFormData(queryFilters, subjectOptions),
   });
-
-  // const [v, setV] = useState(1)
-  // useEffect(() => {
-  //   const i = setInterval(() => setV(Math.random()), 2_000)
-  //
-  //   return () => clearInterval(i)
-  // }, [])
 
   // keep always ageFrom <= ageTo
   useEffect(() => {
@@ -35,10 +54,13 @@ export const SpecialistFilterForm = memo(() => {
     })
   }, [])
 
-  const subjectOptions: any[] = []
-
   const onSubmit = (data: SpecialistFilterFormData) => {
-    console.log("onSubmit", data, formDataToFilterData(data))
+    const filterData = formDataToFilterData(data)
+    navigate(
+      {search: qs.stringify(filterData)},
+      { replace: true }, // чтобы не возиться с историй браузера
+    )
+    props.onSubmit(filterData)
   }
 
   return (
@@ -102,6 +124,38 @@ export const SpecialistFilterForm = memo(() => {
           }
         />
       </label>
+
+      <label>
+        <span> Квалификация </span>
+        <Controller
+          name="profSpeciality"
+          control={control}
+          render={
+            ({ field }) => <Select
+              {...field}
+              options={PROF_SPECIALITY_OPTIONS}
+            />
+          }
+        />
+      </label>
+
+      <label>
+        <span> Рейтинг </span>
+        <Controller
+          name="rating"
+          control={control}
+          render={
+            ({ field }) => <Select
+              {...field}
+              options={RATING_OPTIONS}
+            />
+          }
+        />
+      </label>
+
+      <Button>
+        Показать анкеты
+      </Button>
     </form>
   )
 })

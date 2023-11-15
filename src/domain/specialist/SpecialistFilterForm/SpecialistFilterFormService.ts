@@ -100,12 +100,16 @@ export const formDataToFilterData = (formDara: SpecialistFilterFormData): Omit<F
 }
 
 export const filterDataToFormData = (filterData: FetchSpecialistsFilter, subjectOptions: SelectValueOf<SubjectId>[] ): SpecialistFilterFormData => {
+  const ageFrom = AGE_OPTIONS.find((opt) => opt.value == filterData.ageFrom) ||  AGE_OPTIONS.at(0)!;
+  const ageToValue = Math.max(ageFrom.value!, Number(filterData.ageTo))
+  const ageTo = AGE_OPTIONS.find((opt) => opt.value == ageToValue) ||  AGE_OPTIONS.at(-1)!
+
   return {
-    sex: SEX_OPTIONS.find((opt) => opt.value === filterData.sex),
-    profSpeciality: PROF_SPECIALITY_OPTIONS.find((opt) => opt.value === filterData.profSpeciality),
-    ageFrom: filterData.ageFrom == null ? undefined : { value: filterData.ageFrom, label: String(filterData.ageFrom) },
-    ageTo: filterData.ageTo == null ? undefined : { value: filterData.ageTo, label: String(filterData.ageTo) },
-    rating: RATING_OPTIONS.find((opt) => opt.value?.from === filterData.ageFrom && opt.value?.to === filterData.ageTo),
-    subjectId: subjectOptions.find((opt) => opt.value === filterData.subjectId),
+    sex: SEX_OPTIONS.find((opt) => opt.value == filterData.sex),
+    profSpeciality: PROF_SPECIALITY_OPTIONS.find((opt) => opt.value == filterData.profSpeciality),
+    ageFrom,
+    ageTo,
+    rating: RATING_OPTIONS.find((opt) => opt.value?.from == filterData.ratingFrom && opt.value?.to == filterData.ratingTo) || RATING_OPTIONS.at(0),
+    subjectId: subjectOptions.find((opt) => opt.value == filterData.subjectId) || subjectOptions.at(0),
   }
 }

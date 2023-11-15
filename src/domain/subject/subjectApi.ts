@@ -8,3 +8,18 @@ export const fetchALlSubjects = async (): Promise<Subject[]> => {
 
   return res.data
 }
+
+export const fetchAllSubjectsMemoized = (() => {
+  let memoizedResponsePromise: Promise<Subject[]> | null
+
+  return () => {
+    if (!memoizedResponsePromise) {
+      memoizedResponsePromise = fetchALlSubjects()
+      memoizedResponsePromise.catch(() => {
+        memoizedResponsePromise = null
+      })
+    }
+
+    return memoizedResponsePromise
+  }
+})()
