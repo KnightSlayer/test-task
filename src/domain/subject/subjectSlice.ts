@@ -8,7 +8,7 @@ export type SubjectDomainState = Record<SubjectId, Subject>
 const initialState: SubjectDomainState = {}
 
 export const fetchAllSubjectsThunk = createAsyncThunk(
-  "subject/fetchCount",
+  "subject/fetch",
   async () => {
     const subjects = await fetchAllSubjectsMemoized()
     return subjects

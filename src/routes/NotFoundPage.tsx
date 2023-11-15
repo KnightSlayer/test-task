@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { SearchSpecialistPagePath } from "./SearchSpecialistPage"
+import { SearchSpecialistPagePath } from "./SearchSpecialistPage/SearchSpecialistPage"
 
 export const NotFoundPage = () => (
   <div>

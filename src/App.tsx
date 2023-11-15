@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import "./App.css"
 import { NotFoundPage } from "./routes/NotFoundPage"
-import { SearchSpecialistPagePath, SearchSpecialistPage } from "./routes/SearchSpecialistPage"
+import { SearchSpecialistPagePath, SearchSpecialistPage } from "./routes/SearchSpecialistPage/SearchSpecialistPage"
 
 const router = createBrowserRouter([
   {

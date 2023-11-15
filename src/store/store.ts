@@ -1,11 +1,13 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit"
 import counterReducer from "../features/counter/counterSlice"
 import { domainReducer } from "../domain/_store/domainSlice"
+import { searchSpecialistPageReducer } from "../routes/SearchSpecialistPage/searchSpecialistPageSlice";
 
 export const store = configureStore({
   reducer: {
     domain: domainReducer,
-    counter: counterReducer,
+    // counter: counterReducer,
+    searchSpecialistPage: searchSpecialistPageReducer,
   },
 })
 

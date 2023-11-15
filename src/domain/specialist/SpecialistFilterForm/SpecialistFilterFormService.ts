@@ -1,6 +1,6 @@
 import { ProfSpeciality, Sex } from "../Specialist"
 import { SubjectId } from "../../subject/Subject"
-import { FetchSpecialistsFilter } from "../specialistApi"
+import { SpecialistsFilter } from "../specialistApi"
 
 type SelectValueOf<V> = {
   value: V | undefined
@@ -87,7 +87,7 @@ export const RATING_OPTIONS: SelectValueOf<{ from: number; to: number }>[] = (()
     return options
 })()
 
-export const formDataToFilterData = (formDara: SpecialistFilterFormData): Omit<FetchSpecialistsFilter, 'limit' | 'offset'> => {
+export const formDataToFilterData = (formDara: SpecialistFilterFormData): Omit<SpecialistsFilter, 'limit' | 'offset'> => {
   return {
     sex: formDara.sex?.value,
     profSpeciality: formDara.profSpeciality?.value,
@@ -99,7 +99,7 @@ export const formDataToFilterData = (formDara: SpecialistFilterFormData): Omit<F
   }
 }
 
-export const filterDataToFormData = (filterData: FetchSpecialistsFilter, subjectOptions: SelectValueOf<SubjectId>[] ): SpecialistFilterFormData => {
+export const filterDataToFormData = (filterData: SpecialistsFilter, subjectOptions: SelectValueOf<SubjectId>[] ): SpecialistFilterFormData => {
   const ageFrom = AGE_OPTIONS.find((opt) => opt.value == filterData.ageFrom) ||  AGE_OPTIONS.at(0)!;
   const ageToValue = Math.max(ageFrom.value!, Number(filterData.ageTo))
   const ageTo = AGE_OPTIONS.find((opt) => opt.value == ageToValue) ||  AGE_OPTIONS.at(-1)!

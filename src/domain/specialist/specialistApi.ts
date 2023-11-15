@@ -1,3 +1,4 @@
+import qs from 'qs'
 import { ProfSpeciality, Sex, SpecialistLevel, Specialist } from "./Specialist"
 import { SubjectId } from "../subject/Subject"
 import { API_ROOT } from "../../common/api";
@@ -8,7 +9,7 @@ export enum FetchSpecialistsFilterType {
   FAVORITES = 2,
 }
 
-export type FetchSpecialistsFilter = {
+export type SpecialistsFilter = {
   limit: number
   offset?: number
   level?: SpecialistLevel
@@ -23,13 +24,13 @@ export type FetchSpecialistsFilter = {
   filterType?: FetchSpecialistsFilterType
 }
 
-export const fetchSpecialists = async (filter: FetchSpecialistsFilter) => {
+export const fetchSpecialists = async (filter: SpecialistsFilter) => {
   const res: {
     data: {
       items: Specialist[]
       totalCount: number
     }
-  } = await fetch(`${API_ROOT}/search/specialists`).then((response) =>
+  } = await fetch(`${API_ROOT}/search/specialists?${qs.stringify(filter)}`, ).then((response) =>
     response.json(),
   )
 

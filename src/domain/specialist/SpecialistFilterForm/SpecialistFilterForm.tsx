@@ -14,15 +14,15 @@ import { Select } from "../../../common/components/Select"
 import { useAppSelector } from "../../../store/hooks"
 import { selectSubjects } from "../../subject/subjectSlice"
 import { Button } from "../../../common/components/Button"
-import { FetchSpecialistsFilter } from "../specialistApi"
+import { SpecialistsFilter } from "../specialistApi"
 
 type SpecialistFilterFormProps = {
-  onSubmit: (filterData: Omit<FetchSpecialistsFilter, 'limit' | 'offset'>) => void
+  onSubmit: (filterData: Omit<SpecialistsFilter, 'limit' | 'offset'>) => void
 }
 
 export const SpecialistFilterForm = memo((props: SpecialistFilterFormProps) => {
   const navigate = useNavigate();
-  const queryFilters = qs.parse(window.location.search.slice(1)) as unknown as FetchSpecialistsFilter // TODO: type guard
+  const queryFilters = qs.parse(window.location.search.slice(1)) as unknown as SpecialistsFilter // TODO: type guard
 
   const subjects = useAppSelector(selectSubjects)
   const subjectOptions = useMemo(() => Object.values(subjects).map(subject => ({
@@ -62,6 +62,11 @@ export const SpecialistFilterForm = memo((props: SpecialistFilterFormProps) => {
     )
     props.onSubmit(filterData)
   }
+
+
+  useEffect(() => {
+    handleSubmit(onSubmit)()
+  }, [])
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
