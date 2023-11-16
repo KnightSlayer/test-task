@@ -1,3 +1,5 @@
+import { IsoDate } from "../types";
+
 const pluralize = (number: number, one: string, two: string, many: string) => {
   if (number % 10 === 1 && number % 100 !== 11) {
     return one;
@@ -8,7 +10,7 @@ const pluralize = (number: number, one: string, two: string, many: string) => {
   }
 }
 
-export const timeAgo = (dateString: string) => {
+export const timeAgo = (dateString: IsoDate) => {
   const currentDate = new Date();
   const date = new Date(dateString);
 

@@ -7,7 +7,7 @@ import { colors, desktopMediaQuery } from "../../../common/styles";
 import noPhotoManSrc from "../../../common/assets/no-photo-man.svg"
 import noPhotoWomanSrc from "../../../common/assets/no-photo-woman.svg"
 import noPhotoSrc from "../../../common/assets/no-photo.svg"
-import {timeAgo} from "../../../common/services/dateTimeService";
+import { timeAgo } from "../../../common/services/dateTimeService";
 
 const ContainerStyled = styled.div`
   width: 140px;
