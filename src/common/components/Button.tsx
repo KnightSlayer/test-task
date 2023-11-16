@@ -1,13 +1,35 @@
 import { ReactNode, ButtonHTMLAttributes } from "react"
+import styled from '@emotion/styled'
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode
   onClick?: (...props: any[]) => any
 }
+const ButtonStyled = styled.button`
+  padding: 12px 47px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 2px;
+  background: var(--Pink, #FF006B);
+  
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 100%;
 
+  cursor: pointer;
+  
+  transition: opacity 0.3s ease;
+
+  &:hover {
+    opacity: 0.8;
+  }
+`
 export const Button = (props: ButtonProps) => {
   return (
-    <button
+    <ButtonStyled
       {...props}
     />
   )
