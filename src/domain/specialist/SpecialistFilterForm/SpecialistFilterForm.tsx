@@ -26,6 +26,9 @@ export const SpecialistFilterForm = memo((props: SpecialistFilterFormProps) => {
   const queryFilters = qs.parse(window.location.search.slice(1)) as unknown as SpecialistsFilter // TODO: type guard
 
   // TODO: вынести subjectOptions в пропсы. а то из-за useAppSelector компонент ререндарится лишние разы
+  // вообще с редаксом работать больно. даже с RTK. ререндеринги ещё ладно.
+  // вы попробуйте сделать динамическое добавление редюсеров (например когда разные роуты на разные чанки разбиты)
+  // есть такие хорошие альтернативы. например взгляните на "Zustand". любовь с первого взгляда
   const subjects = useAppSelector(selectSubjects)
   const subjectOptions = useMemo(() => Object.values(subjects).map(subject => ({
     value: subject.id,
@@ -58,9 +61,6 @@ export const SpecialistFilterForm = memo((props: SpecialistFilterFormProps) => {
 
   const onSubmit = (data: SpecialistFilterFormData) => {
     // TODO: не сабмитить, если фильтр не поменялся.
-    // вообще с редаксом работать больно. даже с RTK. ререндеринги ещё ладно.
-    // вы попробуйте сделать динамическое добавление редюсеров (например когда разные роуты на разные чанки разбиты)
-    // есть такие хорошие альтернативы. например взгляните на "Zustand". любовь с первого взгляда
     const filterData = formDataToFilterData(data)
     navigate(
       {search: qs.stringify(filterData)},
