@@ -25,7 +25,6 @@ const ContainerStyled = styled.form`
   justify-content: space-around;
   gap: 20px;
 
-
   ${desktopMediaQuery} {
     gap: 36px; // 80
   }
@@ -36,6 +35,21 @@ const FilterBlockStyled = styled.label`
   
   ${desktopMediaQuery} {
     width: 312px;
+  }
+`
+const FromToAgeStyled = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`
+const FromToAgeItemStyled = styled.label`
+  display: flex;
+  align-items: center;
+
+  gap: 4px;
+  
+  ${desktopMediaQuery} {
+    gap: 12px;
   }
 `
 
@@ -129,33 +143,35 @@ export const SpecialistFilterForm = memo((props: SpecialistFilterFormProps) => {
       <FilterBlockStyled>
         <LabelStyled> В возрасте </LabelStyled>
 
-        <label>
-          <span> От </span>
-          <Controller
-            name="ageFrom"
-            control={control}
-            render={
-              ({ field }) => <Select
-                {...field}
-                options={AGE_OPTIONS}
-              />
-            }
-          />
-        </label>
+        <FromToAgeStyled>
+          <FromToAgeItemStyled>
+            <span> От </span>
+            <Controller
+              name="ageFrom"
+              control={control}
+              render={
+                ({ field }) => <Select
+                  {...field}
+                  options={AGE_OPTIONS}
+                />
+              }
+            />
+          </FromToAgeItemStyled>
 
-        <label>
-          <span> До </span>
-          <Controller
-            name="ageTo"
-            control={control}
-            render={
-              ({ field }) => <Select
-                {...field}
-                options={AGE_OPTIONS}
-              />
-            }
-          />
-        </label>
+          <FromToAgeItemStyled>
+            <span> До </span>
+            <Controller
+              name="ageTo"
+              control={control}
+              render={
+                ({ field }) => <Select
+                  {...field}
+                  options={AGE_OPTIONS}
+                />
+              }
+            />
+          </FromToAgeItemStyled>
+        </FromToAgeStyled>
       </FilterBlockStyled>
 
       <FilterBlockStyled>
