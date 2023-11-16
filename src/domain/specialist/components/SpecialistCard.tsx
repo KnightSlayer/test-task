@@ -61,6 +61,16 @@ const RatingValueStyled = styled.div<{ isNew: boolean }>`
   }
 `
 
+const TextsBlockStyled = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  ${desktopMediaQuery} {
+    gap: 8px
+  }
+`
+
 const TopLineStyled = styled.div`
   display: flex;
   gap: 4px;
@@ -87,14 +97,31 @@ const OnlineMarkedStyled = styled.div`
   background-color: ${colors.green};
   border-radius: 100%;
   flex-shrink: 0;
-  
+
   width: 8px;
   height: 8px;
-  
+
   ${desktopMediaQuery} {
     width: 12px;
     height: 12px;
   }
+`
+const SubjectsStyled = styled.span`
+  font-style: italic;
+  font-weight: 500;
+  color: ${colors.darkGray};
+  
+  line-height: 12px;
+  font-size: 12px;
+
+  ${desktopMediaQuery} {
+    font-size: 18px;
+    line-height: 18px;
+  }
+`
+
+const OtherSubjectsStyled = styled.span`
+  opacity: 0.5;
 `
 
 
@@ -131,13 +158,23 @@ export const SpecialistCard = memo(({ specialistId }: SpecialistCardProps) => {
         </RatingValueStyled>
       </RatingContainerStyled>
 
-      <TopLineStyled>
-        <TopLineTextStyled title={topLineText} >
-          { topLineText }
-        </TopLineTextStyled>
-        <OnlineMarkedStyled />
-        { specialist.onlineStatus === OnlineStatus.ONLINE && <OnlineMarkedStyled />}
-      </TopLineStyled>
+      <TextsBlockStyled>
+        <TopLineStyled>
+          <TopLineTextStyled title={topLineText} >
+            { topLineText }
+          </TopLineTextStyled>
+          { specialist.onlineStatus === OnlineStatus.ONLINE && <OnlineMarkedStyled />}
+        </TopLineStyled>
+
+        <SubjectsStyled>
+          <div> { specialist.defaultSubjectName } </div>
+          { specialist.subjectsCount > 0 && (
+            <OtherSubjectsStyled>
+              и еще {specialist.subjectsCount} тем{specialist.subjectsCount > 1 ? 'ы' : 'а'}
+            </OtherSubjectsStyled>
+          )}
+        </SubjectsStyled>
+      </TextsBlockStyled>
     </ContainerStyled>
   )
 })
