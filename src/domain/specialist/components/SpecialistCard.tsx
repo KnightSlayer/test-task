@@ -8,6 +8,7 @@ import noPhotoManSrc from "../../../common/assets/no-photo-man.svg"
 import noPhotoWomanSrc from "../../../common/assets/no-photo-woman.svg"
 import noPhotoSrc from "../../../common/assets/no-photo.svg"
 import { timeAgo } from "../../../common/services/dateTimeService";
+import { useMediaQuery } from "../../../common/hooks/useMediaQuery";
 
 const ContainerStyled = styled.div`
   width: 140px;
@@ -144,6 +145,7 @@ type SpecialistCardProps = {
 
 export const SpecialistCard = memo(({ specialistId }: SpecialistCardProps) => {
   const specialist = useAppSelector((state) => selectSpecialistById(state, { specialistId }))
+  const isDesktop = useMediaQuery(desktopMediaQuery.replace(/@media */, ''));
 
   if (!specialist) {
     // TODO: may be load by id (lazy loading)
@@ -188,7 +190,7 @@ export const SpecialistCard = memo(({ specialistId }: SpecialistCardProps) => {
           )}
         </SubjectsStyled>
 
-        { specialist.onlineStatus === OnlineStatus.OFFLINE && (
+        { isDesktop && specialist.onlineStatus === OnlineStatus.OFFLINE && (
           <TimeAgoStyled>
             Был{ specialist.sex === Sex.FEMALE ? 'а' : ''}{' '}
             { timeAgo(specialist.lastActivityTime) }
