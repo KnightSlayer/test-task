@@ -16,7 +16,7 @@ import { useAppSelector } from "../../../store/hooks"
 import { selectSubjects } from "../../subject/subjectSlice"
 import { Button } from "../../../common/components/Button"
 import { SpecialistsFilter } from "../specialistApi"
-import { desktopMediaQuery } from "../../../common/styles";
+import { colors, desktopMediaQuery } from "../../../common/styles";
 
 
 const ContainerStyled = styled.form`
@@ -24,9 +24,14 @@ const ContainerStyled = styled.form`
   flex-wrap: wrap;
   justify-content: space-around;
   gap: 20px;
+  border-radius: 2px;
+  border: 1px solid ${colors.lightGray};
+  padding: 8px;
 
   ${desktopMediaQuery} {
     gap: 36px;
+    padding: 0;
+    border: none;
   }
 `
 
@@ -93,6 +98,7 @@ const LabelStyled = styled.div<{isMain?: boolean}>`
 type SpecialistFilterFormProps = {
   onSubmit: (filterData: Omit<SpecialistsFilter, 'limit' | 'offset'>) => void
   disableSubmit: boolean
+  style: any
 }
 
 export const SpecialistFilterForm = memo((props: SpecialistFilterFormProps) => {
@@ -149,7 +155,7 @@ export const SpecialistFilterForm = memo((props: SpecialistFilterFormProps) => {
   }, [])
 
   return (
-    <ContainerStyled onSubmit={handleSubmit(onSubmit)}>
+    <ContainerStyled onSubmit={handleSubmit(onSubmit)} style={props.style} >
       <FilterBlockStyled>
         <LabelStyled isMain> Я ищу психолога </LabelStyled>
         <Controller

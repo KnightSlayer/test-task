@@ -1,3 +1,4 @@
+import styled from '@emotion/styled'
 import { useCallback, useMemo, useRef } from "react"
 import { SpecialistFilterForm } from "../../domain/specialist/SpecialistFilterForm/SpecialistFilterForm"
 import { Preloader } from "../../common/components/Preloader"
@@ -8,8 +9,20 @@ import { loadFirstPageThunk, loadMoreThunk, selectSearchSpecialistPageState } fr
 import { Button } from "../../common/components/Button";
 import { SpecialistsList } from "../../domain/specialist/components/SpecialistsList";
 import { EmptySearchBanner } from "./EmptySearchBanner";
+import { desktopMediaQuery } from "../../common/styles";
 
 export const SearchSpecialistPagePath = "/"
+
+const PageStyled = styled.div`
+  margin: auto;
+  box-sizing: border-box;
+  width: 320px;
+  padding: 16px 16px 40px;
+
+  ${desktopMediaQuery} {
+  }
+  
+`
 
 export const SearchSpecialistPage = () => {
   const dispatch = useAppDispatch()
@@ -32,10 +45,11 @@ export const SearchSpecialistPage = () => {
 
   return (
     <Preloader loaders={loaders}>
-      <div>
+      <PageStyled>
         <SpecialistFilterForm
           onSubmit={onSubmit}
           disableSubmit={isLoading}
+          style={{marginBottom: '8px'}}
         />
 
         { isEmptySearch && <EmptySearchBanner />}
@@ -44,11 +58,11 @@ export const SearchSpecialistPage = () => {
 
         { isLoading && <div> TODO: Skeleton </div>}
         { hasMore && (
-          <Button onClick={loadMore}>
+          <Button onClick={loadMore} style={{margin: '32px auto 0'}}>
             Показать еще
           </Button>
         )}
-      </div>
+      </PageStyled>
     </Preloader>
   )
 }

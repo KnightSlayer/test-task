@@ -7,6 +7,7 @@ import { desktopMediaQuery } from "../../../common/styles";
 const ContainerStyled = styled.div`
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
   gap: 8px;
   
   ${desktopMediaQuery} {
