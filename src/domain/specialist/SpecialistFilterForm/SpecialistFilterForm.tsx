@@ -37,6 +37,19 @@ const FilterBlockStyled = styled.label`
     width: 312px;
   }
 `
+const FilterButtonBlockStyled = styled.label`
+  width: 100%;
+  
+  ${desktopMediaQuery} {
+    width: 312px;
+    display: flex;
+    align-items: end;
+    
+    > button {
+      width: 100%;
+    }
+  }
+`
 const FromToAgeStyled = styled.div`
   display: flex;
   justify-content: space-between;
@@ -216,11 +229,11 @@ export const SpecialistFilterForm = memo((props: SpecialistFilterFormProps) => {
         />
       </FilterBlockStyled>
 
-      <FilterBlockStyled>
+      <FilterButtonBlockStyled>
         <Button disabled={props.disableSubmit}>
           Показать анкеты
         </Button>
-      </FilterBlockStyled>
+      </FilterButtonBlockStyled>
     </ContainerStyled>
   )
 })
