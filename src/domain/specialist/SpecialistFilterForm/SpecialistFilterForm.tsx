@@ -1,3 +1,4 @@
+import styled from '@emotion/styled'
 import { memo, useEffect, useMemo } from "react"
 import { Controller, useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
@@ -15,6 +16,41 @@ import { useAppSelector } from "../../../store/hooks"
 import { selectSubjects } from "../../subject/subjectSlice"
 import { Button } from "../../../common/components/Button"
 import { SpecialistsFilter } from "../specialistApi"
+import { desktopMediaQuery } from "../../../common/styles";
+
+
+const ContainerStyled = styled.form`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 20px;
+
+
+  ${desktopMediaQuery} {
+    gap: 36px; // 80
+  }
+`
+
+const FilterBlockStyled = styled.label`
+  width: 100%;
+  
+  ${desktopMediaQuery} {
+    width: 312px;
+  }
+`
+
+const LabelStyled = styled.div<{isMain?: boolean}>`
+  line-height: 100%;
+  font-weight: 700;
+
+  padding-bottom: 8px;
+  font-size: 14px;
+
+  ${desktopMediaQuery} {
+    font-size: ${(props) => props.isMain ? '20px' : '18px'}
+    padding-bottom: 12px;
+  }
+`
 
 type SpecialistFilterFormProps = {
   onSubmit: (filterData: Omit<SpecialistsFilter, 'limit' | 'offset'>) => void
@@ -75,9 +111,9 @@ export const SpecialistFilterForm = memo((props: SpecialistFilterFormProps) => {
   }, [])
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <label>
-        <span> Я ищу психолога </span>
+    <ContainerStyled onSubmit={handleSubmit(onSubmit)}>
+      <FilterBlockStyled>
+        <LabelStyled isMain> Я ищу психолога </LabelStyled>
         <Controller
           name="sex"
           control={control}
@@ -88,10 +124,10 @@ export const SpecialistFilterForm = memo((props: SpecialistFilterFormProps) => {
             />
           }
         />
-      </label>
+      </FilterBlockStyled>
 
-      <div>
-        <span> В возрасте </span>
+      <FilterBlockStyled>
+        <LabelStyled> В возрасте </LabelStyled>
 
         <label>
           <span> От </span>
@@ -120,10 +156,10 @@ export const SpecialistFilterForm = memo((props: SpecialistFilterFormProps) => {
             }
           />
         </label>
-      </div>
+      </FilterBlockStyled>
 
-      <label>
-        <span> Тема </span>
+      <FilterBlockStyled>
+        <LabelStyled> Тема </LabelStyled>
         <Controller
           name="subjectId"
           control={control}
@@ -134,10 +170,10 @@ export const SpecialistFilterForm = memo((props: SpecialistFilterFormProps) => {
             />
           }
         />
-      </label>
+      </FilterBlockStyled>
 
-      <label>
-        <span> Квалификация </span>
+      <FilterBlockStyled>
+        <LabelStyled> Квалификация </LabelStyled>
         <Controller
           name="profSpeciality"
           control={control}
@@ -148,10 +184,10 @@ export const SpecialistFilterForm = memo((props: SpecialistFilterFormProps) => {
             />
           }
         />
-      </label>
+      </FilterBlockStyled>
 
-      <label>
-        <span> Рейтинг </span>
+      <FilterBlockStyled>
+        <LabelStyled> Рейтинг </LabelStyled>
         <Controller
           name="rating"
           control={control}
@@ -162,11 +198,13 @@ export const SpecialistFilterForm = memo((props: SpecialistFilterFormProps) => {
             />
           }
         />
-      </label>
+      </FilterBlockStyled>
 
-      <Button disabled={props.disableSubmit}>
-        Показать анкеты
-      </Button>
-    </form>
+      <FilterBlockStyled>
+        <Button disabled={props.disableSubmit}>
+          Показать анкеты
+        </Button>
+      </FilterBlockStyled>
+    </ContainerStyled>
   )
 })
