@@ -22,7 +22,7 @@ import { colors, desktopMediaQuery } from "../../../common/styles";
 const ContainerStyled = styled.form`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-between;
   gap: 20px;
   border-radius: 2px;
   border: 1px solid ${colors.lightGray};
@@ -30,8 +30,9 @@ const ContainerStyled = styled.form`
 
   ${desktopMediaQuery} {
     gap: 36px;
-    padding: 0;
+    padding: 0 0 24px;
     border: none;
+    border-bottom: 1px solid ${colors.lightGray};
   }
 `
 
@@ -41,7 +42,7 @@ const FilterBlockStyled = styled.label<{oneLineMobile?: boolean}>`
   gap: 8px;
   align-items: center;
   
-  > div {
+  > div:first-of-type {
     padding-bottom: ${(props) => props.oneLineMobile ? '0' : '8px'};
   }
 
@@ -49,7 +50,7 @@ const FilterBlockStyled = styled.label<{oneLineMobile?: boolean}>`
     width: 312px;
     display: block;
     
-    > div {
+    > div:first-of-type {
       padding-bottom: 12px
     }
   }

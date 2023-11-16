@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { desktopMediaQuery } from "../styles";
 
 export const useMediaQuery = (query: string) => {
   const [matches, setMatches] = useState(window.matchMedia(query).matches);
@@ -21,3 +22,4 @@ export const useMediaQuery = (query: string) => {
 
   return matches;
 }
+export const useIsDesktop = () => useMediaQuery(desktopMediaQuery.replace(/@media */, ''));

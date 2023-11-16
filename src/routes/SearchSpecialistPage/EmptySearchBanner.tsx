@@ -3,9 +3,12 @@ import NotFoundCardIcon from '../../common/assets/not-found-card.svg'
 import {desktopMediaQuery} from "../../common/styles";
 
 const ContainerStyled = styled.div`
-  margin: auto;
-  width: fit-content;
   text-align: center;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `
 
 const TextStyled = styled.div`

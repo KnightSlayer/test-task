@@ -1,6 +1,6 @@
 import { ReactNode, ButtonHTMLAttributes } from "react"
 import styled from '@emotion/styled'
-import { colors } from "../styles";
+import {colors, desktopMediaQuery} from "../styles";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode
@@ -26,6 +26,10 @@ const ButtonStyled = styled.button`
 
   &:hover {
     opacity: 0.8;
+  }
+  
+  ${desktopMediaQuery} {
+    font-size: 20px;
   }
 `
 export const Button = (props: ButtonProps) => {

@@ -10,16 +10,23 @@ import { Button } from "../../common/components/Button";
 import { SpecialistsList } from "../../domain/specialist/components/SpecialistsList";
 import { EmptySearchBanner } from "./EmptySearchBanner";
 import { desktopMediaQuery } from "../../common/styles";
+import { useIsDesktop } from "../../common/hooks/useMediaQuery";
 
 export const SearchSpecialistPagePath = "/"
 
 const PageStyled = styled.div`
+  display: flex;
+  flex-direction: column;
   margin: auto;
   box-sizing: border-box;
+  min-height: 100vh;
+  
   width: 320px;
   padding: 16px 16px 40px;
 
   ${desktopMediaQuery} {
+    width: 1184px;
+    padding: 52px 44px 80px 44px;
   }
   
 `
@@ -27,6 +34,7 @@ const PageStyled = styled.div`
 export const SearchSpecialistPage = () => {
   const dispatch = useAppDispatch()
   const loaders = useMemo(() => [() => dispatch(fetchAllSubjectsThunk())], [])
+  const isDesktop = useIsDesktop()
   // я бы хранил применённый filter в редаксе. но в задании специально указано так не делать
   const lastSubmittedFilterRef = useRef<Omit<SpecialistsFilter, 'limit' | 'offset'>>()
   const onSubmit = useCallback((filterData: Omit<SpecialistsFilter, 'limit' | 'offset'>) => {
@@ -49,7 +57,7 @@ export const SearchSpecialistPage = () => {
         <SpecialistFilterForm
           onSubmit={onSubmit}
           disableSubmit={isLoading}
-          style={{marginBottom: '8px'}}
+          style={{marginBottom: isDesktop ? '24px' : '8px'}}
         />
 
         { isEmptySearch && <EmptySearchBanner />}
