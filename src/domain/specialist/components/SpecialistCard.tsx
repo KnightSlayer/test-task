@@ -7,6 +7,7 @@ import { colors, desktopMediaQuery } from "../../../common/styles";
 import noPhotoManSrc from "../../../common/assets/no-photo-man.svg"
 import noPhotoWomanSrc from "../../../common/assets/no-photo-woman.svg"
 import noPhotoSrc from "../../../common/assets/no-photo.svg"
+import {timeAgo} from "../../../common/services/dateTimeService";
 
 const ContainerStyled = styled.div`
   width: 140px;
@@ -124,6 +125,18 @@ const OtherSubjectsStyled = styled.span`
   opacity: 0.5;
 `
 
+const TimeAgoStyled = styled.span`
+  font-weight: 500;
+  color: ${colors.lightGray};
+  
+  line-height: 12px;
+  font-size: 12px;
+
+  ${desktopMediaQuery} {
+    font-size: 18px;
+    line-height: 18px;
+  }
+`
 
 type SpecialistCardProps = {
   specialistId: SpecialistId
@@ -170,10 +183,17 @@ export const SpecialistCard = memo(({ specialistId }: SpecialistCardProps) => {
           <div> { specialist.defaultSubjectName } </div>
           { specialist.subjectsCount > 0 && (
             <OtherSubjectsStyled>
-              и еще {specialist.subjectsCount} тем{specialist.subjectsCount > 1 ? 'ы' : 'а'}
+              и еще {specialist.subjectsCount} тем{specialist.subjectsCount === 1 ? 'а' : specialist.subjectsCount > 4 ? '' : 'ы'}
             </OtherSubjectsStyled>
           )}
         </SubjectsStyled>
+
+        { specialist.onlineStatus === OnlineStatus.OFFLINE && (
+          <TimeAgoStyled>
+            Был{ specialist.sex === Sex.FEMALE ? 'а' : ''}{' '}
+            { timeAgo(specialist.lastActivityTime) }
+          </TimeAgoStyled>
+        )}
       </TextsBlockStyled>
     </ContainerStyled>
   )
