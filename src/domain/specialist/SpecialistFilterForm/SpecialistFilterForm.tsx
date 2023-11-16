@@ -26,32 +26,45 @@ const ContainerStyled = styled.form`
   gap: 20px;
 
   ${desktopMediaQuery} {
-    gap: 36px; // 80
+    gap: 36px;
   }
 `
 
-const FilterBlockStyled = styled.label`
+const FilterBlockStyled = styled.label<{oneLineMobile?: boolean}>`
   width: 100%;
+  display: ${(props) => props.oneLineMobile ? 'flex' : 'block'};
+  gap: 8px;
+  align-items: center;
   
+  > div {
+    padding-bottom: ${(props) => props.oneLineMobile ? '0' : '8px'};
+  }
+
   ${desktopMediaQuery} {
     width: 312px;
+    display: block;
+    
+    > div {
+      padding-bottom: 12px
+    }
   }
 `
 const FilterButtonBlockStyled = styled.label`
   width: 100%;
-  
+
   ${desktopMediaQuery} {
     width: 312px;
     display: flex;
     align-items: end;
-    
-    > button {
-      width: 100%;
-    }
+  }
+
+  > button {
+    width: 100%;
   }
 `
 const FromToAgeStyled = styled.div`
   display: flex;
+  gap: 15px;
   justify-content: space-between;
   align-items: center;
 `
@@ -60,7 +73,7 @@ const FromToAgeItemStyled = styled.label`
   align-items: center;
 
   gap: 4px;
-  
+
   ${desktopMediaQuery} {
     gap: 12px;
   }
@@ -70,12 +83,10 @@ const LabelStyled = styled.div<{isMain?: boolean}>`
   line-height: 100%;
   font-weight: 700;
 
-  padding-bottom: 8px;
   font-size: 14px;
 
   ${desktopMediaQuery} {
-    font-size: ${(props) => props.isMain ? '20px' : '18px'}
-    padding-bottom: 12px;
+    font-size: ${(props) => props.isMain ? '20px' : '18px'};
   }
 `
 
@@ -153,7 +164,7 @@ export const SpecialistFilterForm = memo((props: SpecialistFilterFormProps) => {
         />
       </FilterBlockStyled>
 
-      <FilterBlockStyled>
+      <FilterBlockStyled oneLineMobile>
         <LabelStyled> В возрасте </LabelStyled>
 
         <FromToAgeStyled>
