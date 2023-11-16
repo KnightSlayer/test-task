@@ -1,9 +1,9 @@
 import styled from '@emotion/styled'
 import { memo, useMemo } from "react";
-import { Sex, SpecialistId } from "../Specialist";
+import { OnlineStatus, Sex, SpecialistId } from "../Specialist";
 import { useAppSelector } from "../../../store/hooks";
 import { selectSpecialistById } from "../specialistSlice";
-import { desktopMediaQuery } from "../../../common/styles";
+import { colors, desktopMediaQuery } from "../../../common/styles";
 import noPhotoManSrc from "../../../common/assets/no-photo-man.svg"
 import noPhotoWomanSrc from "../../../common/assets/no-photo-woman.svg"
 import noPhotoSrc from "../../../common/assets/no-photo.svg"
@@ -19,6 +19,11 @@ const ContainerStyled = styled.div`
 const PhotoStyled = styled.img`
   width: 100%;
   aspect-ratio: 1 / 1;
+  padding-bottom: 8px;
+
+  ${desktopMediaQuery} {
+    padding-bottom: 16px;
+  }
 `
 
 const RatingContainerStyled = styled.div`
@@ -50,13 +55,47 @@ const RatingContainerStyled = styled.div`
 
 const RatingValueStyled = styled.div<{ isNew: boolean }>`
   font-size: ${props => props.isNew ? '8px' : '16px'};
-  
+
   ${desktopMediaQuery} {
     font-size: ${props => props.isNew ? '16px' : '24px'};
   }
 `
 
+const TopLineStyled = styled.div`
+  display: flex;
+  gap: 4px;
+`
+const TopLineTextStyled = styled.div`
+  font-weight: 500;
+  line-height: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  
+  font-size: 14px;
 
+  .div {
+    white-space: nowrap;
+  }
+
+  ${desktopMediaQuery} {
+    font-size: 26px;
+  }
+`
+
+const OnlineMarkedStyled = styled.div`
+  background-color: ${colors.green};
+  border-radius: 100%;
+  flex-shrink: 0;
+  
+  width: 8px;
+  height: 8px;
+  
+  ${desktopMediaQuery} {
+    width: 12px;
+    height: 12px;
+  }
+`
 
 
 type SpecialistCardProps = {
@@ -80,6 +119,7 @@ export const SpecialistCard = memo(({ specialistId }: SpecialistCardProps) => {
     }
   }, [specialist.photoUrl, specialist.sex])
 
+  const topLineText =  `${ specialist.name }, ${ specialist.age }`
 
   return (
     <ContainerStyled>
@@ -90,7 +130,14 @@ export const SpecialistCard = memo(({ specialistId }: SpecialistCardProps) => {
           { specialist.rating || 'NEW'}
         </RatingValueStyled>
       </RatingContainerStyled>
-      { specialist.name }
+
+      <TopLineStyled>
+        <TopLineTextStyled title={topLineText} >
+          { topLineText }
+        </TopLineTextStyled>
+        <OnlineMarkedStyled />
+        { specialist.onlineStatus === OnlineStatus.ONLINE && <OnlineMarkedStyled />}
+      </TopLineStyled>
     </ContainerStyled>
   )
 })

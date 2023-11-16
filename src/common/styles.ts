@@ -5,5 +5,6 @@ const breakpoints = [1200]
 export const [desktopMediaQuery] = breakpoints.map(bp => `@media (min-width: ${bp}px)`)
 
 export const colors = {
-  pink: "#FF006B"
+  pink: "#FF006B",
+  green: "#37B86B",
 }
