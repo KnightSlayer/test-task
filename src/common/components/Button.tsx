@@ -1,5 +1,6 @@
 import { ReactNode, ButtonHTMLAttributes } from "react"
 import styled from '@emotion/styled'
+import { colors } from "../styles";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode
@@ -12,7 +13,7 @@ const ButtonStyled = styled.button`
   align-items: center;
   border: none;
   border-radius: 2px;
-  background: var(--Pink, #FF006B);
+  background: ${colors.pink};
   
   color: white;
   font-size: 14px;

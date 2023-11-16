@@ -1,5 +1,19 @@
+import styled from '@emotion/styled'
 import { SpecialistId } from "../Specialist";
 import { SpecialistCard } from "./SpecialistCard";
+import { desktopMediaQuery } from "../../../common/styles";
+
+
+const ContainerStyled = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  
+  ${desktopMediaQuery} {
+    gap: 20px;
+  }
+`
+
 
 type SpecialistsListProps = {
   specialistIds: SpecialistId[]
@@ -7,13 +21,13 @@ type SpecialistsListProps = {
 export const SpecialistsList = ({ specialistIds }: SpecialistsListProps) => {
 
   return (
-    <div>
+    <ContainerStyled>
       { specialistIds.map((specialistId) => (
         <SpecialistCard
           key={specialistId}
           specialistId={specialistId}
         />
       ))}
-    </div>
+    </ContainerStyled>
   )
 }
