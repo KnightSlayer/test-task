@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import NotFoundCardIcon from '../../common/assets/not-found-card.svg'
-import {desktopMediaQuery} from "../../common/styles";
+import { desktopMediaQuery } from "../../common/styles";
 
 const ContainerStyled = styled.div`
   text-align: center;

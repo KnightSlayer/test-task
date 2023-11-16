@@ -9,3 +9,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+/* TODO: вместо этого прописать стили/компоненты в src/common/components/Select.tsx */
+.css-1xc3v61-indicatorContainer {
+  padding: 0 4px 0 0 !important;
+}
+.css-tj5bde-Svg {
+  width: 14px;
+  height: 14px;
+}
+.css-art2ul-ValueContainer2 {
+  padding: 2px 6px !important;
+}
